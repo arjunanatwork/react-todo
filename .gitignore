@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea/
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/react-todo.iml
+.idea/vcs.xml
