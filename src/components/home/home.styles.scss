@@ -1,0 +1,14 @@
+.root-child {
+  height: inherit;
+}
+
+.section {
+  height: calc(100% - 3.5rem);
+  overflow: hidden;
+
+  .container {
+    height: 100%;
+  }
+}
+
+

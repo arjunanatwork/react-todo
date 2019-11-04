@@ -1,0 +1,32 @@
+.interactive-bg {
+  height: 100vh;
+  background-image: url(https://source.unsplash.com/random);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  -webkit-box-shadow: inset 24px 4px 64px -24px rgba(71,71,71,1);
+  -moz-box-shadow: inset 24px 4px 64px -24px rgba(71,71,71,1);
+  box-shadow: inset 24px 4px 64px -24px rgba(71,71,71,1);
+  padding: 0px;
+}
+
+@media (max-width: 769px) {
+  .interactive-bg{
+    display: none
+  }
+}
+
+.login-logo {
+  margin: 0 auto 50px;
+  max-height: 100px;
+}
+
+.button {
+   margin-top: 20px;
+   margin-bottom: 20px;
+   min-width: 150px;
+ }
+
+.columns{
+  margin: 0px;
+}

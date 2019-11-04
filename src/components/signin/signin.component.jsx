@@ -1,138 +1,48 @@
-import React, { useState } from 'react';
-import { auth } from "../../firebase/firebase.util";
-import {Link as RouterLink} from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from 'react';
+import { Link } from "react-router-dom";
+import appLogo from '../../assets/images/todo-icon.png'
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import './signin.styles.scss';
 
-const useStyles = makeStyles(theme => ({
-    '@global': {
-        body: {
-            backgroundColor: theme.palette.common.white,
-        },
-    },
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
-
-export default function SignIn() {
-    const classes = useStyles();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleSubmit = async event => {
-        event.preventDefault();
-        try {
-            const user = await auth.signInWithEmailAndPassword(email, password);
-            setPassword('')
-            setEmail('')
-            console.log(user)
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
+const SignIn = () => {
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline/>
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                    <TextField
-                        variant="standard"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <TextField
-                        variant="standard"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
-                    </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link component={RouterLink} to="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
+        <div className="columns is-vcentered">
+            <div className="login column is-4 ">
+                <section className="section">
+                    <div className="has-text-centered">
+                        <img className="login-logo" src={appLogo}/>
+                    </div>
+                    <div className="field">
+                        <label className="label">Username</label>
+                        <div className="control has-icons-right">
+                            <input className="input" type="text"/>
+                            <span className="icon is-small is-right">
+                            <i className="fa fa-user"></i>
+                         </span>
+                        </div>
+                    </div>
+                    <div className="field">
+                        <label className="label">Password</label>
+                        <div className="control has-icons-right">
+                            <input className="input" type="password"/>
+                            <span className="icon is-small is-right">
+                                <i className="fa fa-key"></i>
+                             </span>
+                        </div>
+                    </div>
+                    <div className="has-text-centered">
+                        <button className="button is-primary">Sign in</button>
+                    </div>
+                    <div className="has-text-centered">
+                        <Link to="/signup">Don't you have an account? Sign up now!</Link>
+                    </div>
+                </section>
             </div>
-            <Box mt={8}>
-                <Copyright/>
-            </Box>
-        </Container>
-    );
+                <div id="particles-js" className="interactive-bg column is-8">
+                </div>
+        </div>
+    )
 }
+
+export default SignIn;

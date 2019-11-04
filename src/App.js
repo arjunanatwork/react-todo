@@ -2,17 +2,19 @@ import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 import { connect } from "react-redux";
-import './App.css';
+import './App.scss';
+import 'bulma-helpers/css/bulma-helpers.min.css'
 import SignIn from "./components/signin/signin.component";
 import SignUp from "./components/signup/signup.component";
 import {setCurrentUser} from "./redux/user/user.action";
+import Home from "./components/home/home.component";
 
 class App extends React.Component {
 
-    unsubscribeFromAuth = null
+    unsubscribeFromAuth = null;
 
     componentDidMount() {
-        const { setCurrentUser } = this.props
+        const { setCurrentUser } = this.props;
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if(userAuth) {
                 const userRef = await createUserProfileDocument(userAuth);
@@ -22,7 +24,7 @@ class App extends React.Component {
             } else {
                 setCurrentUser(userAuth)
             }
-        })
+        });
         console.log("App props", this.props)
     }
 
@@ -32,13 +34,12 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <Switch>
-                    <Route exact path="/" render={() => this.props.currentUser ? (<Redirect to={'/home'}/>) :(<Redirect to={'/signin'}/>)}/>
-                    <Route path="/signin" render={() => this.props.currentUser ? (<Redirect to={'/home'}/>) : (<SignIn/>)}/>
-                    <Route path="/signup" component={SignUp}/>
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path="/" render={() => this.props.currentUser ? (<Redirect to={'/home'} />) :(<SignIn/>)} />
+                <Route path="/signin" render={() => this.props.currentUser ? (<Redirect to={'/home'}/>) : (<SignIn/>)} />
+                <Route path="/signup" component={SignUp}/>
+                <Route path="/home" component={Home}/>
+            </Switch>
         );
     }
 
@@ -46,9 +47,9 @@ class App extends React.Component {
 
 const mapStateToProps = ({user}) => ({
     currentUser: user.currentUser
-})
+});
 
 const mapDispatchToProps = dispatch => ({
     setCurrentUser : user => dispatch(setCurrentUser(user))
-})
+});
 export default connect(mapStateToProps, mapDispatchToProps)(App);
