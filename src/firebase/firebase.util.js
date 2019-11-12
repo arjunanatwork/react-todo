@@ -39,3 +39,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     return userRef
 }
+
+export const createNewProjectForUser = async (uid, projectName) => {
+    const userProjectRef = await firestore.doc(`users/${uid}`).collection('projects').add({
+        name: projectName,
+        createdAt: new Date()
+    });
+    return userProjectRef;
+}

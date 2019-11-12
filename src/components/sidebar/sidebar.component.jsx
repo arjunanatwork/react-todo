@@ -1,13 +1,25 @@
 import React , { useState } from 'react';
 import './sidebar.styles.scss';
 import AddProjectModal from "../add-project-modal/add-project-modal.component";
+import { useSelector } from "react-redux";
+import { createNewProjectForUser } from "../../firebase/firebase.util";
 
 const SideBar = () => {
 
+    const currentUser = useSelector(state => state.user.currentUser);
     const [isActive, setIsActive] = useState(false);
 
-    const showModal = () => {
+    const toggleModal = () => {
         setIsActive(!isActive)
+    }
+
+    const addProject = async (projectName) => {
+        try {
+            const projectRef = await createNewProjectForUser(currentUser.id, projectName);
+            toggleModal();
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
@@ -24,11 +36,11 @@ const SideBar = () => {
                 <ul className="menu-list">
                     {/* Projects will come here */}
                 </ul>
-                <div className="content">
-                    <p onClick={showModal}><span className="icon has-margin-right-5"><i className="fa fa-plus"></i></span>Add Project</p>
+                <div className="content add-project-blk">
+                    <p onClick={toggleModal}><span className="icon has-margin-right-5"><i className="fa fa-plus"></i></span>Add Project</p>
                 </div>
             </aside>
-            <AddProjectModal onClose={showModal} isActive={isActive} />
+            <AddProjectModal addProject={addProject} toggleModal={toggleModal} isActive={isActive} />
         </div>
     )
 }

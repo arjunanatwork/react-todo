@@ -7,7 +7,9 @@ import 'bulma-helpers/css/bulma-helpers.min.css'
 import SignIn from "./components/signin/signin.component";
 import SignUp from "./components/signup/signup.component";
 import {setCurrentUser} from "./redux/user/user.action";
+import { selectCurrentUser } from "./redux/user/user.selector";
 import Home from "./components/home/home.component";
+import {createStructuredSelector} from "reselect";
 
 class App extends React.Component {
 
@@ -45,8 +47,8 @@ class App extends React.Component {
 
 }
 
-const mapStateToProps = ({user}) => ({
-    currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({

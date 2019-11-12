@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const AddProjectModal = ({onClose, isActive}) => {
+const AddProjectModal = ({addProject, toggleModal, isActive}) => {
+
+    const [projectName, setProjectName] = useState('');
 
     return (
         <div className={`${isActive ? 'is-active':''} modal`}>
@@ -8,14 +10,20 @@ const AddProjectModal = ({onClose, isActive}) => {
             <div className="modal-card">
                 <header className="modal-card-head">
                     <p className="modal-card-title">Add Project</p>
-                    <button className="delete" aria-label="close" onClick={onClose}></button>
+                    <button className="delete" aria-label="close" onClick={toggleModal}></button>
                 </header>
                 <section className="modal-card-body">
-                   Add Project
+                    <div className="field">
+                        <label className="label">Project Name</label>
+                        <div className="control">
+                            <input className="input" type="text" placeholder="Text input" 
+                                   value={projectName} onChange={(e)=> setProjectName(e.target.value)}/>
+                        </div>
+                    </div>
                 </section>
                 <footer className="modal-card-foot">
-                    <button className="button is-primary">Save changes</button>
-                    <button className="button" onClick={onClose}>Cancel</button>
+                    <button className="button is-primary" onClick={() => addProject(projectName)}>Add</button>
+                    <button className="button" onClick={() => toggleModal()}>Close</button>
                 </footer>
             </div>
         </div>
