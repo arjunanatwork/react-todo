@@ -1,0 +1,12 @@
+.prj-icon-delete,
+.prj-icon-edit {
+  float:right;
+  visibility: hidden;
+}
+
+.prj-item:hover {
+  .prj-icon-delete,
+  .prj-icon-edit {
+    visibility: visible;
+  }
+}

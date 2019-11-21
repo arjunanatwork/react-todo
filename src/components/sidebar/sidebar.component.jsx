@@ -1,29 +1,24 @@
-import React , { useState } from 'react';
+import React , { useState, useEffect } from 'react';
+import {connect} from "react-redux";
 import './sidebar.styles.scss';
-import AddProjectModal from "../add-project-modal/add-project-modal.component";
-import { useSelector } from "react-redux";
-import { createNewProjectForUser } from "../../firebase/firebase.util";
+import { useDispatch, useSelector } from "react-redux";
+import { addProjectStartAsync, fetchProjectsStartAsync } from "../../redux/project/project.action";
+import AddProjectSidebar from "../add-project-sidebar/add-project-sidebar.component";
+import {createStructuredSelector} from "reselect";
+import {selectGetProjects} from "../../redux/project/project.selector";
+import {selectCurrentUser} from "../../redux/user/user.selector";
+import ProjectItem from "../project-items/project-items.component";
 
-const SideBar = () => {
+const SideBar = ({projects, currentUser}) => {
 
-    const currentUser = useSelector(state => state.user.currentUser);
-    const [isActive, setIsActive] = useState(false);
+    const dispatch = useDispatch();
 
-    const toggleModal = () => {
-        setIsActive(!isActive)
-    }
-
-    const addProject = async (projectName) => {
-        try {
-            const projectRef = await createNewProjectForUser(currentUser.id, projectName);
-            toggleModal();
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    useEffect(() => {
+        if(currentUser)
+            dispatch(fetchProjectsStartAsync(currentUser))
+    }, [currentUser]);
 
     return (
-        <div className="sidebar">
             <aside className="menu">
                 <ul className="menu-list">
                     <li><a><span className="icon has-margin-right-5"><i className="fa fa-inbox"></i></span>Dashboard</a></li>
@@ -35,14 +30,19 @@ const SideBar = () => {
                 </p>
                 <ul className="menu-list">
                     {/* Projects will come here */}
+                    {
+                        projects ?
+                            projects.map(project => (<ProjectItem key={project.id}  project={project}/>)) : null
+                    }
                 </ul>
                 <div className="content add-project-blk">
-                    <p onClick={toggleModal}><span className="icon has-margin-right-5"><i className="fa fa-plus"></i></span>Add Project</p>
+                    <AddProjectSidebar/>
                 </div>
             </aside>
-            <AddProjectModal addProject={addProject} toggleModal={toggleModal} isActive={isActive} />
-        </div>
     )
 }
-
-export default SideBar;
+const mapStateToProps = createStructuredSelector({
+    projects: selectGetProjects,
+    currentUser : selectCurrentUser
+})
+export default connect(mapStateToProps)(SideBar);
