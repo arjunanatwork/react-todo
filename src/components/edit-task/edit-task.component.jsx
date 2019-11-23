@@ -8,7 +8,7 @@ const EditTask = ({task}) => {
     const [taskDetail, setTaskDetail] = useState(task.detail);
 
     const updateTask = () => {
-        dispatch(updateTaskStartAsync(task.id, taskDetail));
+        dispatch(updateTaskStartAsync(task.id, {...task, detail:taskDetail}));
         setTaskDetail('');
         dispatch(toggleEditTask());
     };

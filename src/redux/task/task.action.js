@@ -24,7 +24,7 @@ export const addTaskStartAsync = (userId, projectId, taskDetail) => {
         try {
             await firestore.collection('tasks').add({
                 detail: taskDetail,
-                isCompleted: false,
+                isCompleted: 0,
                 projectId: projectId,
                 userId: userId,
                 createdAt: new Date()
@@ -45,11 +45,11 @@ export const deleteTaskStartAsync = (id) => {
     }
 };
 
-export const updateTaskStartAsync = (taskId, taskDetail) => {
+export const updateTaskStartAsync = (taskId, task) => {
     return async (dispatch) => {
         try {
             await firestore.collection('tasks').doc(taskId)
-                .update({ detail: taskDetail });
+                .update(task);
         } catch (e) {
             console.log("Error while update Task");
         }
@@ -59,7 +59,10 @@ export const updateTaskStartAsync = (taskId, taskDetail) => {
 export const fetchTasksByProject = (project) => {
     return (dispatch) => {
         dispatch(fetchTaskByProjectStart())
-        firestore.collection('tasks').where("projectId", "==", project.id).onSnapshot(querySnapshot => {
+        firestore.collection('tasks')
+            .where("projectId", "==", project.id)
+            .orderBy("isCompleted", "asc")
+            .onSnapshot(querySnapshot => {
             let tasks = [];
             querySnapshot.forEach(function(doc) {
                 tasks.push({...doc.data(), id: doc.id});

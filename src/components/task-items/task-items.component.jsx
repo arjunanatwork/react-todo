@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import './task-items.styles.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {deleteTaskStartAsync, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
+import {deleteTaskStartAsync, toggleAddTask, toggleEditTask, updateTaskStartAsync} from "../../redux/task/task.action";
 import EditTask from "../edit-task/edit-task.component";
 import {selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
 
@@ -27,12 +27,21 @@ const TaskItem = ({task, index}) => {
         dispatch(deleteTaskStartAsync(task.id));
     };
 
+    const handleTaskCheckboxChange = (e) => {
+        dispatch(updateTaskStartAsync(task.id, {...task, isCompleted: e.target.checked ? 1:0 }));
+    }
+
     return (
         <Fragment>
             <div className="task-item-details" style={{ display : (toggleEditTaskSelector.index == index && !toggleEditTaskSelector.hidden) ? 'none': 'flex'}}>
                 <div className="field is-marginless">
-                    <input className="is-checkradio is-primary" id="taskDetail" type="checkbox" name="taskDetail" defaultChecked />
-                    <label htmlFor="taskDetail">{task.detail}</label>
+                    <input className="is-checkradio is-primary" id={`taskDetail_${task.id}`} type="checkbox"
+                           name={`taskDetail_${task.id}`} checked={!!task.isCompleted} onChange={handleTaskCheckboxChange}/>
+                    <label htmlFor={`taskDetail_${task.id}`}>
+                        {
+                            !!task.isCompleted ? (<s>{task.detail}</s>) : (task.detail)
+                        }
+                    </label>
                 </div>
                 <div className="task-item-action">
                     <span className="icon task-icon-edit" onClick={toggleEditTaskAction}>
