@@ -22,25 +22,20 @@ const ProjectReducer = (state = INITIAL_STATE, action) => {
             project = action.payload
             return {
                 ...state,
-                editProjectModal: { editProjectModalHidden : editProjectModalHidden, project: project }
+                editProjectModal: { editProjectModalHidden , project }
             };
-        case ProjectActionTypes.PROJECT_START:
+        case ProjectActionTypes.FETCH_PROJECT_START:
             return {
                 ...state,
                 isLoading: true
             };
-        case ProjectActionTypes.PROJECT_FAILURE:
+        case ProjectActionTypes.FETCH_PROJECT_FAILURE:
             return {
                 ...state,
                 isLoading: false,
                 errorMessage: action.payload
             };
-        case ProjectActionTypes.PROJECT_SUCCESS:
-            return {
-                ...state,
-                isLoading: false
-            };
-        case ProjectActionTypes.FETCH_PROJECT:
+        case ProjectActionTypes.FETCH_PROJECT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,

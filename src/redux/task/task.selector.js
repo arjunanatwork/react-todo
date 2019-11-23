@@ -6,3 +6,13 @@ export const selectGetTasksByProject = createSelector(
     [selectTask],
     (task) => task.tasksByProject
 );
+
+export const selectToggleEditTask = createSelector(
+    [selectTask],
+    (task) => task.toggleEditTask
+);
+
+export const selectToggleAddTask = createSelector(
+    [selectTask],
+    (task) => task.toggleAddTask
+);

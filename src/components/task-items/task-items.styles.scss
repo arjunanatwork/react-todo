@@ -1,0 +1,14 @@
+.task-item-details {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.task-item-action {
+  visibility: hidden;
+}
+
+.task-item-details:hover {
+  .task-item-action {
+    visibility: visible;
+  }
+}

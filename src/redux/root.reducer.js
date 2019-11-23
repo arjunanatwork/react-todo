@@ -6,5 +6,5 @@ import TaskReducer from "./task/task.reducer";
 export default combineReducers({
     user: userReducer,
     project: ProjectReducer,
-    tasks: TaskReducer
+    task: TaskReducer
 })

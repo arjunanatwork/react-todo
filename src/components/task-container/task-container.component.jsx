@@ -1,32 +1,24 @@
-import React, { useState , Fragment} from 'react';
-import connect from "react-redux";
+import React from 'react';
 import './task-container.styles.scss';
-import {createStructuredSelector} from "reselect";
+import AddTask from "../add-task/add-task.component";
+import TaskItem from "../task-items/task-items.component";
 
-const TaskContainer = () => {
-
-    const [toggleAddDetailBtn, setToggleAddDetailBtn] = useState(false);
+const TaskContainer = ({project, tasks}) => {
 
     return (
-        <Fragment>
-            <p className="title is-4">Test Project</p>
-            <div className="content add-task" style={{'display': !toggleAddDetailBtn ? 'block':'none'}}>
-                <a onClick={() => setToggleAddDetailBtn(true)}><span className='icon add-task-icon'><i className="fas fa-plus"></i></span> Add Task</a>
+        <div className='task-container'>
+            <p className="title is-4">{project.name}</p>
+            <div className="task-list">
+                {
+                    tasks.length > 0 ?
+                        tasks.map((task, index) => (<TaskItem key={task.id} task={task} index={index}/>))
+                        :
+                        null
+                }
             </div>
-            <div className="content add-task-detail" style={{'display': toggleAddDetailBtn ? 'block':'none'}}>
-                <input className="input" type="text" placeholder="Task Detail"/>
-                <div className="add-task-action">
-                    <div className="buttons">
-                        <button className="button is-primary">Add Task</button>
-                        <button className="button" onClick={() => setToggleAddDetailBtn(false)}>Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </Fragment>
+            <AddTask/>
+        </div>
     )
 };
 
-const mapStateToProps = createStructuredSelector({
-
-});
 export default TaskContainer;

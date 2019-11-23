@@ -10,31 +10,25 @@ export const editProjectModal = (project) => ({
     payload: project
 });
 
-export const projectStart = () => ({
-    type: ProjectActionTypes.PROJECT_START
+export const fetchProjectStart = () => ({
+    type: ProjectActionTypes.FETCH_PROJECT_START
 });
 
-export const projectSuccess = () => ({
-    type:ProjectActionTypes.PROJECT_SUCCESS
-})
-
-export const projectFailure = (errorMessage) => ({
-    type: ProjectActionTypes.PROJECT_FAILURE,
+export const fetchProjectFailure = (errorMessage) => ({
+    type: ProjectActionTypes.FETCH_PROJECT_FAILURE,
     payload: errorMessage
 });
 
 export const addProjectStartAsync = (userId, projectName) => {
     return async (dispatch) => {
         try {
-            dispatch(projectStart())
             await firestore.collection('projects').add({
                 name: projectName,
                 userId: userId,
                 createdAt: new Date()
             })
-            dispatch(projectSuccess())
         } catch (e) {
-            dispatch(projectFailure(e.message))
+            console.log("Error while adding Project");
         }
     }
 };
@@ -42,39 +36,35 @@ export const addProjectStartAsync = (userId, projectName) => {
 export const updateProjectStartAsync = (projectId, projectName) => {
     return async (dispatch) => {
         try {
-            dispatch(projectStart())
             await firestore.collection('projects').doc(projectId)
                 .update({ name: projectName });
-            dispatch(projectSuccess())
         } catch (e) {
-            dispatch(projectFailure(e.message))
+            console.log("Error while update Project");
         }
     }
-}
+};
 
 export const deleteProjectStartAsync = (id) => {
     return async (dispatch) => {
         try {
-            dispatch(projectStart())
             await firestore.collection('projects').doc(id).delete();
-            dispatch(projectSuccess())
         } catch (e) {
-            dispatch(projectFailure(e.message))
+            console.log("Error while deleting Project")
         }
     }
 };
 
 export const fetchProjectsStartAsync = (userRef) => {
     return (dispatch) => {
+        dispatch(fetchProjectStart());
         firestore.collection('projects').where("userId", "==", userRef.id).onSnapshot(querySnapshot => {
             let projects = [];
             querySnapshot.forEach(function(doc) {
                 projects.push({...doc.data(), id: doc.id});
             });
-            dispatch({
-                type: ProjectActionTypes.FETCH_PROJECT,
-                payload: projects
-            })
+            dispatch({type: ProjectActionTypes.FETCH_PROJECT_SUCCESS, payload: projects})
+        }, onError => {
+            dispatch(fetchProjectFailure(onError.message));
         })
     }
 }
