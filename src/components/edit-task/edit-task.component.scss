@@ -1,0 +1,17 @@
+.edit-task-action-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+
+  .buttons button {
+    margin-top: 0px;
+  }
+
+  .other-actions {
+    .icon {
+      margin: 0 .5rem;
+    }
+  }
+
+}
