@@ -28,11 +28,10 @@ const Home = ({currentUser, editProjectModal:{ editProjectModalHidden }, tasks})
             <Header/>
             <div className="section">
                 <div className="container">
-                    <div className="columns">
-                        <div className="column is-2 is-offset-2 is-hidden-touch">
+                        <div className="sidebar is-hidden-touch">
                             <SideBar/>
                         </div>
-                        <div className="column is-5">
+                        <div className="main is-full-width-mobile">
                             <div className="columns">
                                 <div className="column is-full">
                                     { tasks.project ?
@@ -45,7 +44,6 @@ const Home = ({currentUser, editProjectModal:{ editProjectModalHidden }, tasks})
                         </div>
                     </div>
                 </div>
-            </div>
             <AddProjectModal/>
             { editProjectModalHidden ? null : (<EditProjectModal/>)}
         </Fragment>

@@ -4,7 +4,27 @@
 
   .container {
     height: 100%;
+    display: flex;
+    justify-content: center;
   }
+
+  .sidebar {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    width: 15%;
+    overflow: auto;
+  }
+
+  .main {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    width: 50%;
+    overflow: auto;
+    background-color: #fff;
+  }
+
 }
 
 

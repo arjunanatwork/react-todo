@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     tasks: { project: null, tasks: []},
     isLoading: false,
     errorMessage: undefined
-}
+};
 
 const TaskReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -34,11 +34,11 @@ const TaskReducer = (state = INITIAL_STATE, action) => {
         case TaskActionTypes.TOGGLE_EDIT_TASK:
             let { hidden, index } = state.toggleEditTask;
             hidden = !hidden;
-            index = action.payload
+            index = action.payload;
             return {
                 ...state,
                 toggleEditTask: { hidden, index }
-            }
+            };
         default:
             return state
     }

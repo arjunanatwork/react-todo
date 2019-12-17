@@ -44,10 +44,10 @@ const TaskItem = ({task, index}) => {
                     </label>
                 </div>
                 <div className="task-item-action">
-                    <span className="icon task-icon-edit" onClick={toggleEditTaskAction}>
+                    <span className="icon has-text-grey task-icon-edit" onClick={toggleEditTaskAction}>
                             <i className="fas fa-edit"></i>
                     </span>
-                    <span className="icon task-icon-delete" onClick={deleteTaskAction}>
+                    <span className="icon has-text-grey task-icon-delete" onClick={deleteTaskAction}>
                             <i className="fas fa-trash"></i>
                     </span>
                 </div>

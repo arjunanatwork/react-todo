@@ -37,10 +37,10 @@ const ProjectItem = ({project}) => {
     return (
         <li className="prj-item" onClick={fetchTasks}>
             <a> {project.name}
-                <span className="icon prj-icon-delete" onClick={deleteProject}>
+                <span className="icon prj-icon-delete has-text-grey" onClick={deleteProject}>
                     <i className="fas fa-trash"></i>
                 </span>
-                <span className="icon prj-icon-edit" onClick={editProject}>
+                <span className="icon prj-icon-edit has-text-grey" onClick={editProject}>
                     <i className="fas fa-edit"></i>
                 </span>
             </a>

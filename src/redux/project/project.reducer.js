@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     editProjectModal: { editProjectModalHidden: true, project: null},
     isLoading: false,
     errorMessage: undefined
-}
+};
 
 const ProjectReducer = (state = INITIAL_STATE, action) => {
 
@@ -19,7 +19,7 @@ const ProjectReducer = (state = INITIAL_STATE, action) => {
         case ProjectActionTypes.EDIT_PROJECT_MODAL:
             let { editProjectModalHidden, project } = state.editProjectModal;
             editProjectModalHidden = !editProjectModalHidden;
-            project = action.payload
+            project = action.payload;
             return {
                 ...state,
                 editProjectModal: { editProjectModalHidden , project }
@@ -44,6 +44,6 @@ const ProjectReducer = (state = INITIAL_STATE, action) => {
         default:
             return state
     }
-}
+};
 
-export default ProjectReducer
+export default ProjectReducer;

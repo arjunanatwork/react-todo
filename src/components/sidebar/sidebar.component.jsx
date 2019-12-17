@@ -28,10 +28,10 @@ const SideBar = ({projects, currentUser}) => {
             <aside className="menu">
                 <ul className="menu-list">
                     <li onClick={fetchDefaultTasks}>
-                        <a><span className="icon has-margin-right-5"><i className="fa fa-inbox"></i></span>Inbox</a>
+                        <a><span className="icon has-margin-right-5" style={{color:'#246fe0'}}><i className="fa fa-inbox"></i></span>Inbox</a>
                     </li>
-                    <li><a><span className="icon has-margin-right-5"><i className="fa fa-calendar-check"></i></span>Today</a></li>
-                    <li><a><span className="icon has-margin-right-5"><i className="fa fa-calendar-alt"></i></span>Next 7 days</a></li>
+                    <li><a><span className="icon has-margin-right-5" style={{color: '#058527'}}><i className="fa fa-calendar-check"></i></span>Today</a></li>
+                    <li><a><span className="icon has-margin-right-5" style={{color: '#692fc2'}}><i className="fa fa-calendar-alt"></i></span>Next 7 days</a></li>
                 </ul>
                 <p className="menu-label">
                     Projects
