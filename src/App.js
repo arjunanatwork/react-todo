@@ -4,11 +4,11 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 import { connect } from "react-redux";
 import './App.scss';
 import 'bulma-helpers/css/bulma-helpers.min.css'
-import SignIn from "./components/signin/signin.component";
-import SignUp from "./components/signup/signup.component";
+import SignIn from "./pages/signin/signin.component";
+import SignUp from "./pages/signup/signup.component";
 import {setCurrentUser} from "./redux/user/user.action";
 import { selectCurrentUser } from "./redux/user/user.selector";
-import Home from "./components/home/home.component";
+import Home from "./pages/home/home.component";
 import {createStructuredSelector} from "reselect";
 
 class App extends React.Component {

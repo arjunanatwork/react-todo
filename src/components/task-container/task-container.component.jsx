@@ -7,13 +7,11 @@ const TaskContainer = ({project, tasks}) => {
 
     return (
         <div className='task-container'>
-            <p className="title is-4">{project.name}</p>
+            <p className="title is-4"> {project.name} </p>
             <div className="task-list">
                 {
                     tasks.length > 0 ?
-                        tasks.map((task, index) => (<TaskItem key={task.id} task={task} index={index}/>))
-                        :
-                        null
+                        tasks.map((task, index) => (<TaskItem key={task.id} task={task} index={index}/>)) : null
                 }
             </div>
             <AddTask/>

@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {connect, useSelector} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import {addTaskStartAsync, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
-import {selectGetTasksByProject, selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
+import {selectGetTasks, selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
 import {createStructuredSelector} from "reselect";
 
 const AddTask = ({ currentUser, projectDetails : { project }, dispatch}) => {
@@ -45,6 +45,6 @@ const AddTask = ({ currentUser, projectDetails : { project }, dispatch}) => {
 
 const mapStateToProps = createStructuredSelector({
     currentUser : selectCurrentUser,
-    projectDetails : selectGetTasksByProject
+    projectDetails : selectGetTasks
 });
 export default connect(mapStateToProps)(AddTask);

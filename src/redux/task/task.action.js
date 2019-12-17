@@ -1,12 +1,12 @@
 import { TaskActionTypes } from "./task.types";
-import {firestore} from "../../firebase/firebase.util";
+import { firestore} from "../../firebase/firebase.util";
 
-export const fetchTaskByProjectStart = () => ({
-    type: TaskActionTypes.FETCH_TASKS_BY_PROJECT_START
+export const fetchTasksStart = () => ({
+    type: TaskActionTypes.FETCH_TASKS_START
 });
 
-export const fetchTaskByProjectFailure = (errorMessage) => ({
-    type: TaskActionTypes.FETCH_TASKS_BY_PROJECT_FAILURE,
+export const fetchTasksFailure = (errorMessage) => ({
+    type: TaskActionTypes.FETCH_TASKS_FAILURE,
     payload: errorMessage
 });
 
@@ -30,6 +30,7 @@ export const addTaskStartAsync = (userId, projectId, taskDetail) => {
                 createdAt: new Date()
             })
         } catch (e) {
+            console.error(e);
             console.log("Error while adding Task");
         }
     }
@@ -56,9 +57,34 @@ export const updateTaskStartAsync = (taskId, task) => {
     }
 };
 
+
+export const fetchTasksForDefaultProject = (userId) => {
+    return (dispatch) => {
+        dispatch(fetchTasksStart());
+        const project = { id: null, name: "Inbox"};
+        firestore.collection('tasks')
+            .where("userId", "==", userId)
+            .where("projectId", "==", null)
+            .orderBy("isCompleted", "asc")
+            .onSnapshot(querySnapshot => {
+                let tasks = [];
+                querySnapshot.forEach(function(doc) {
+                    tasks.push({...doc.data(), id: doc.id});
+                });
+                tasks.sort((a, b) => {
+                    if(a.isCompleted == 0 && b.isCompleted == 0)
+                        return b.createdAt.toDate() - a.createdAt.toDate();
+                });
+                dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
+            } , onError => {
+                dispatch(fetchTasksFailure(onError.message));
+            })
+    }
+};
+
 export const fetchTasksByProject = (project) => {
     return (dispatch) => {
-        dispatch(fetchTaskByProjectStart())
+        dispatch(fetchTasksStart());
         firestore.collection('tasks')
             .where("projectId", "==", project.id)
             .orderBy("isCompleted", "asc")
@@ -67,9 +93,13 @@ export const fetchTasksByProject = (project) => {
             querySnapshot.forEach(function(doc) {
                 tasks.push({...doc.data(), id: doc.id});
             });
-            dispatch({type: TaskActionTypes.FETCH_TASKS_BY_PROJECT_SUCCESS, payload: { project, tasks} })
+            tasks.sort((a, b) => {
+                if(a.isCompleted == 0 && b.isCompleted == 0)
+                    return b.createdAt.toDate() - a.createdAt.toDate();
+            })
+            dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
         }, onError => {
-            dispatch(fetchTaskByProjectFailure(onError.message));
+            dispatch(fetchTasksFailure(onError.message));
         })
     }
 };

@@ -3,28 +3,28 @@ import {TaskActionTypes} from "./task.types";
 const INITIAL_STATE = {
     toggleAddTask : false,
     toggleEditTask : { hidden: true, index: null},
-    tasksByProject: { project: null, tasks: []},
+    tasks: { project: null, tasks: []},
     isLoading: false,
     errorMessage: undefined
 }
 
 const TaskReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case TaskActionTypes.FETCH_TASKS_BY_PROJECT_START:
+        case TaskActionTypes.FETCH_TASKS_START:
             return {
                 ...state,
                 isLoading: true
             };
-        case TaskActionTypes.FETCH_TASKS_BY_PROJECT_FAILURE:
+        case TaskActionTypes.FETCH_TASKS_FAILURE:
             return {
                 ...state,
                 errorMessage: action.payload
             };
-        case TaskActionTypes.FETCH_TASKS_BY_PROJECT_SUCCESS:
+        case TaskActionTypes.FETCH_TASKS_SUCCESS:
             const { project, tasks } = action.payload;
             return {
                 ...state,
-                tasksByProject: { project, tasks }
+                tasks: { project, tasks }
             };
         case TaskActionTypes.TOGGLE_ADD_TASK:
             return {

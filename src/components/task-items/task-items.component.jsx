@@ -29,7 +29,7 @@ const TaskItem = ({task, index}) => {
 
     const handleTaskCheckboxChange = (e) => {
         dispatch(updateTaskStartAsync(task.id, {...task, isCompleted: e.target.checked ? 1:0 }));
-    }
+    };
 
     return (
         <Fragment>

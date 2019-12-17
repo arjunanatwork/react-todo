@@ -11,5 +11,5 @@ const AddProjectSidebar = ({toggleAddProjectModalHidden}) => (
 
 const mapDispatchToProps = dispatch => ({
     toggleAddProjectModalHidden : () => dispatch(toggleAddProjectModalHidden())
-})
+});
 export default connect(null, mapDispatchToProps)(AddProjectSidebar);

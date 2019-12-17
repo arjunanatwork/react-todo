@@ -9,6 +9,7 @@ import {selectGetProjects} from "../../redux/project/project.selector";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import ProjectItem from "../project-items/project-items.component";
 import Loader from 'react-loader-spinner';
+import {fetchTasksForDefaultProject} from "../../redux/task/task.action";
 
 const SideBar = ({projects, currentUser}) => {
 
@@ -19,10 +20,16 @@ const SideBar = ({projects, currentUser}) => {
             dispatch(fetchProjectsStartAsync(currentUser))
     }, [currentUser]);
 
+    const fetchDefaultTasks = () => {
+        dispatch(fetchTasksForDefaultProject(currentUser.id));
+    };
+
     return (
             <aside className="menu">
                 <ul className="menu-list">
-                    <li><a><span className="icon has-margin-right-5"><i className="fa fa-inbox"></i></span>Dashboard</a></li>
+                    <li onClick={fetchDefaultTasks}>
+                        <a><span className="icon has-margin-right-5"><i className="fa fa-inbox"></i></span>Inbox</a>
+                    </li>
                     <li><a><span className="icon has-margin-right-5"><i className="fa fa-calendar-check"></i></span>Today</a></li>
                     <li><a><span className="icon has-margin-right-5"><i className="fa fa-calendar-alt"></i></span>Next 7 days</a></li>
                 </ul>
@@ -43,9 +50,10 @@ const SideBar = ({projects, currentUser}) => {
                 </div>
             </aside>
     )
-}
+};
+
 const mapStateToProps = createStructuredSelector({
     projects: selectGetProjects,
     currentUser : selectCurrentUser
-})
+});
 export default connect(mapStateToProps)(SideBar);

@@ -2,9 +2,9 @@ import { createSelector } from 'reselect';
 
 const selectTask = state => state.task;
 
-export const selectGetTasksByProject = createSelector(
+export const selectGetTasks = createSelector(
     [selectTask],
-    (task) => task.tasksByProject
+    (task) => task.tasks
 );
 
 export const selectToggleEditTask = createSelector(
