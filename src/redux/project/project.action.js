@@ -19,6 +19,11 @@ export const fetchProjectFailure = (errorMessage) => ({
     payload: errorMessage
 });
 
+export const toggleSwitchProjectDropdownHidden = () => ({
+    type: ProjectActionTypes.SWITCH_PROJECT_DROPDOWN_HIDDEN
+});
+
+
 export const addProjectStartAsync = (userId, projectName) => {
     return async (dispatch) => {
         try {
@@ -67,4 +72,6 @@ export const fetchProjectsStartAsync = (userRef) => {
             dispatch(fetchProjectFailure(onError.message));
         })
     }
-}
+};
+
+

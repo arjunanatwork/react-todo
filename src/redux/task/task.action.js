@@ -1,5 +1,6 @@
 import { TaskActionTypes } from "./task.types";
 import { firestore} from "../../firebase/firebase.util";
+import {toggleSwitchProjectDropdownHidden} from "../project/project.action";
 
 export const fetchTasksStart = () => ({
     type: TaskActionTypes.FETCH_TASKS_START
@@ -18,6 +19,18 @@ export const toggleEditTask = (index) => ({
     type: TaskActionTypes.TOGGLE_EDIT_TASK,
     payload: index
 });
+
+export const changeProjectAsync = (taskId, projectId) => {
+    return async (dispatch) => {
+        try {
+            await firestore.collection('tasks').doc(taskId)
+                .update({ projectId: projectId});
+            dispatch(toggleSwitchProjectDropdownHidden());
+        } catch (e) {
+            console.log("Error while moving Project");
+        }
+    }
+};
 
 export const addTaskStartAsync = (userId, projectId, taskDetail) => {
     return async (dispatch) => {

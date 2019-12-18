@@ -15,3 +15,20 @@
   }
 
 }
+
+
+.dropdown.is-active {
+  .custom-dropdown-menu{
+    display: block;
+  }
+}
+
+.custom-dropdown-menu {
+  display: none;
+  right: 0;
+  min-width: 12rem;
+  padding-top: 4px;
+  position: absolute;
+  top: 100%;
+  z-index: 20;
+}

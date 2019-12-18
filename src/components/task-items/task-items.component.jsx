@@ -23,10 +23,12 @@ const TaskItem = ({task, index}) => {
         dispatch(toggleEditTask(index));
     };
 
+    // Delete a Task
     const deleteTaskAction = () => {
         dispatch(deleteTaskStartAsync(task.id));
     };
 
+    // Change the Task completed State
     const handleTaskCheckboxChange = (e) => {
         dispatch(updateTaskStartAsync(task.id, {...task, isCompleted: e.target.checked ? 1:0 }));
     };
