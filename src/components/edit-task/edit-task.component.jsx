@@ -7,6 +7,7 @@ import './edit-task.component.scss';
 import SwitchProjectDropdown from "../switch-project-dropdown/switch-project-dropdown.component";
 import {selectGetProjects, selectSwitchProjectDropdownHidden} from "../../redux/project/project.selector";
 import {toggleSwitchProjectDropdownHidden} from "../../redux/project/project.action";
+import {isMobile} from "react-device-detect";
 
 const EditTask = ({task}) => {
 
@@ -41,10 +42,11 @@ const EditTask = ({task}) => {
         <div className="edit-task-detail has-margin-bottom-20">
             <div className="task-details-container">
                 <input className="input task-input" type="text" placeholder="Task Detail" value={taskDetail} onChange={(e) => setTaskDetail(e.target.value)}/>
-                <DatePicker  dateFormat="dd/MM/yyyy" selected={scheduledOn} onChange={date => setScheduledOn(date)}  customInput={<TaskSchedule />}/>
+                {isMobile ? (<DatePicker withPortal dateFormat="dd/MM/yyyy" showPopperArrow={false} selected={scheduledOn} onChange={date => setScheduledOn(date)}  customInput={<TaskSchedule />}/>)
+                    : (<DatePicker dateFormat="dd/MM/yyyy" showPopperArrow={false} selected={scheduledOn} onChange={date => setScheduledOn(date)}  customInput={<TaskSchedule />}/>) }
             </div>
             <div className="edit-task-action-container">
-                <div className="buttons is-marginless">
+                <div className={`buttons is-marginless ${isMobile ? 'are-small': null }`}>
                     <button className="button is-primary" onClick={updateTask}>Update Task</button>
                     <button className="button" onClick={cancelUpdate}>Cancel</button>
                 </div>

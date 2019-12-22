@@ -80,7 +80,7 @@ export const fetchTasksForDefaultProject = (userId) => {
         const project = { id: 1, name: "Inbox"};
         firestore.collection('tasks')
             .where("userId", "==", userId)
-            .where("projectId", "==", null)
+            .where("projectId", "==", 1)
             .orderBy("isCompleted", "asc")
             .onSnapshot(querySnapshot => {
                 let tasks = [];

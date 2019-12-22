@@ -1,5 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {connect, useSelector} from "react-redux";
+import {isMobile} from 'react-device-detect';
+
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import {addTaskStartAsync, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
 import {selectGetTasks, selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
@@ -33,9 +35,9 @@ const AddTask = ({ currentUser, projectDetails : { project }, dispatch}) => {
             <div className="content add-task-detail" style={{'display': toggleAddTaskSelector ? 'block':'none'}}>
                 <input className="input" type="text" placeholder="Task Detail" value={taskDetail} onChange={(e) => setTaskDetail(e.target.value)}/>
                 <div className="add-task-action">
-                <div className="buttons">
-                <button className="button is-primary" onClick={addTask}>Add Task</button>
-                    <button className="button" onClick={() => dispatch(toggleAddTask())}>Cancel</button>
+                    <div className={`buttons ${isMobile ? 'are-small': null }`}>
+                        <button className="button is-primary" onClick={addTask}>Add Task</button>
+                        <button className="button" onClick={() => dispatch(toggleAddTask())}>Cancel</button>
                     </div>
                 </div>
             </div>
