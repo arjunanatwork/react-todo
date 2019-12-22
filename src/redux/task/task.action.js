@@ -1,5 +1,7 @@
 import { TaskActionTypes } from "./task.types";
 import { firestore} from "../../firebase/firebase.util";
+import moment from 'moment';
+
 import {toggleSwitchProjectDropdownHidden} from "../project/project.action";
 
 export const fetchTasksStart = () => ({
@@ -40,6 +42,7 @@ export const addTaskStartAsync = (userId, projectId, taskDetail) => {
                 isCompleted: 0,
                 projectId: projectId,
                 userId: userId,
+                scheduledOn: null,
                 createdAt: new Date()
             })
         } catch (e) {
@@ -74,12 +77,62 @@ export const updateTaskStartAsync = (taskId, task) => {
 export const fetchTasksForDefaultProject = (userId) => {
     return (dispatch) => {
         dispatch(fetchTasksStart());
-        const project = { id: null, name: "Inbox"};
+        const project = { id: 1, name: "Inbox"};
         firestore.collection('tasks')
             .where("userId", "==", userId)
             .where("projectId", "==", null)
             .orderBy("isCompleted", "asc")
             .onSnapshot(querySnapshot => {
+                let tasks = [];
+                querySnapshot.forEach(function(doc) {
+                    tasks.push({...doc.data(), id: doc.id});
+                });
+                tasks.sort((a, b) => {
+                    if(a.isCompleted == 0 && b.isCompleted == 0)
+                        return b.createdAt.toDate() - a.createdAt.toDate();
+                });
+                dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
+            } , onError => {
+                dispatch(fetchTasksFailure(onError.message));
+            })
+    }
+};
+
+export const fetchTasksForToday = (userId) => {
+    return (dispatch) => {
+        dispatch(fetchTasksStart());
+        const project = { id: null, name: "Today"};
+        const date =  moment().startOf('day').toDate();
+        firestore.collection('tasks')
+            .where("userId", "==",userId)
+            .where("scheduledOn", "==", date)
+            .where("isCompleted","==",0)
+            .get().then(querySnapshot => {
+                let tasks = [];
+                querySnapshot.forEach(function(doc) {
+                    tasks.push({...doc.data(), id: doc.id});
+                });
+                tasks.sort((a, b) => {
+                    if(a.isCompleted == 0 && b.isCompleted == 0)
+                        return b.createdAt.toDate() - a.createdAt.toDate();
+                });
+                dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
+            } , onError => {
+                dispatch(fetchTasksFailure(onError.message));
+            })
+    }
+};
+
+export const fetchTasksForAWeek = (userId) => {
+    return (dispatch) => {
+        dispatch(fetchTasksStart());
+        const project = { id: null, name: "Next 7 Days"};
+        const endDate =  moment().startOf('day').add(7, 'days').toDate();
+        firestore.collection('tasks')
+            .where("userId", "==",userId)
+            .where("scheduledOn", "<=", endDate)
+            .where("isCompleted","==",0)
+            .get().then(querySnapshot => {
                 let tasks = [];
                 querySnapshot.forEach(function(doc) {
                     tasks.push({...doc.data(), id: doc.id});

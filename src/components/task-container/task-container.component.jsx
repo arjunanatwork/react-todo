@@ -14,7 +14,7 @@ const TaskContainer = ({project, tasks}) => {
                         tasks.map((task, index) => (<TaskItem key={task.id} task={task} index={index}/>)) : null
                 }
             </div>
-            <AddTask/>
+            {project.id ?  <AddTask/> : null }
         </div>
     )
 };

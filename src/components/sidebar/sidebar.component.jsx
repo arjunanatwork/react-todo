@@ -9,7 +9,7 @@ import {selectGetProjects} from "../../redux/project/project.selector";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import ProjectItem from "../project-items/project-items.component";
 import Loader from 'react-loader-spinner';
-import {fetchTasksForDefaultProject} from "../../redux/task/task.action";
+import {fetchTasksForAWeek, fetchTasksForDefaultProject, fetchTasksForToday} from "../../redux/task/task.action";
 
 const SideBar = ({projects, currentUser}) => {
 
@@ -24,14 +24,26 @@ const SideBar = ({projects, currentUser}) => {
         dispatch(fetchTasksForDefaultProject(currentUser.id));
     };
 
+    const fetchTodayTasks = () => {
+        dispatch(fetchTasksForToday(currentUser.id));
+    };
+
+    const fetchWeekTasks = () => {
+      dispatch(fetchTasksForAWeek(currentUser.id));
+    };
+
     return (
             <aside className="menu">
                 <ul className="menu-list">
                     <li onClick={fetchDefaultTasks}>
                         <a><span className="icon has-margin-right-5" style={{color:'#246fe0'}}><i className="fa fa-inbox"></i></span>Inbox</a>
                     </li>
-                    <li><a><span className="icon has-margin-right-5" style={{color: '#058527'}}><i className="fa fa-calendar-check"></i></span>Today</a></li>
-                    <li><a><span className="icon has-margin-right-5" style={{color: '#692fc2'}}><i className="fa fa-calendar-alt"></i></span>Next 7 days</a></li>
+                    <li onClick={fetchTodayTasks}>
+                        <a><span className="icon has-margin-right-5" style={{color: '#058527'}}><i className="fa fa-calendar-check"></i></span>Today</a>
+                    </li>
+                    <li onClick={fetchWeekTasks}>
+                        <a><span className="icon has-margin-right-5" style={{color: '#692fc2'}}><i className="fa fa-calendar-alt"></i></span>Next 7 days</a>
+                    </li>
                 </ul>
                 <p className="menu-label">
                     Projects

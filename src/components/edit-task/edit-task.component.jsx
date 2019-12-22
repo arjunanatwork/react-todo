@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {toggleEditTask, updateTaskStartAsync} from "../../redux/task/task.action";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './edit-task.component.scss';
 import SwitchProjectDropdown from "../switch-project-dropdown/switch-project-dropdown.component";
 import {selectGetProjects, selectSwitchProjectDropdownHidden} from "../../redux/project/project.selector";
@@ -14,10 +15,16 @@ const EditTask = ({task}) => {
 
     const dispatch = useDispatch();
     const [taskDetail, setTaskDetail] = useState(task.detail);
+    const [scheduledOn, setScheduledOn] = useState(task.scheduledOn ? task.scheduledOn.toDate() : null);
+
+    // Custom Task Schedule
+    const TaskSchedule = ({ value, onClick }) => (
+        <input className="input task-schedule" placeholder='Schedule' type="text" onClick={onClick} value={value}/>
+    );
 
     // Update Task Details
     const updateTask = () => {
-        dispatch(updateTaskStartAsync(task.id, {...task, detail:taskDetail}));
+        dispatch(updateTaskStartAsync(task.id, {...task, detail:taskDetail, scheduledOn: scheduledOn}));
         dispatch(toggleEditTask());
         if(!switchProjectDropdownHidden)
             dispatch(toggleSwitchProjectDropdownHidden())
@@ -32,7 +39,10 @@ const EditTask = ({task}) => {
 
     return (
         <div className="edit-task-detail has-margin-bottom-20">
-            <input className="input" type="text" placeholder="Task Detail" value={taskDetail} onChange={(e) => setTaskDetail(e.target.value)}/>
+            <div className="task-details-container">
+                <input className="input task-input" type="text" placeholder="Task Detail" value={taskDetail} onChange={(e) => setTaskDetail(e.target.value)}/>
+                <DatePicker  dateFormat="dd/MM/yyyy" selected={scheduledOn} onChange={date => setScheduledOn(date)}  customInput={<TaskSchedule />}/>
+            </div>
             <div className="edit-task-action-container">
                 <div className="buttons is-marginless">
                     <button className="button is-primary" onClick={updateTask}>Update Task</button>
@@ -47,9 +57,6 @@ const EditTask = ({task}) => {
                         </div>
                         <SwitchProjectDropdown task={task} projects={projects.filter(project => project.id != task.projectId)}/>
                     </div>
-                    <span className="icon">
-                      <i className="fas fa-calendar-day fa-lg"></i>
-                    </span>
                 </div>
             </div>
         </div>

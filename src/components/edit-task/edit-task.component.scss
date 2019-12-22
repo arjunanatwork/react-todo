@@ -5,7 +5,7 @@
   margin-top: 1rem;
 
   .buttons button {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   .other-actions {
@@ -15,8 +15,6 @@
   }
 
 }
-
-
 .dropdown.is-active {
   .custom-dropdown-menu{
     display: block;
@@ -31,4 +29,19 @@
   position: absolute;
   top: 100%;
   z-index: 20;
+}
+
+.task-details-container {
+  display: flex;
+
+  .task-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .task-schedule {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
 }
