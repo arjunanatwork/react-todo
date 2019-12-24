@@ -1,22 +1,28 @@
-import React from 'react'
+import React, {useState} from 'react'
 import appLogo from '../../assets/images/todo-icon.png'
+import HeaderMenu from "../header-menu/header-menu.component";
+import {isMobile} from "react-device-detect";
 
 const Header = () => {
 
+    const [burgerToggle, setBurgerToggle] = useState(false);
+
     return (
-        <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+        <nav className={`navbar is-primary  ${isMobile ? 'is-fixed-top':''}`} role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="https://bulma.io">
+                <div className="navbar-item" href="#">
                     <img src={appLogo} alt="App Logo" height="28"/>
-                </a>
-                <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
+                </div>
+                <div href="#" role="button" className={`navbar-burger ${burgerToggle ? 'is-active':''}`} aria-label="menu"
+                   aria-expanded="false" onClick={() => setBurgerToggle(!burgerToggle)}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                </a>
+                </div>
             </div>
+            <HeaderMenu burgerToggle={burgerToggle}/>
         </nav>
     )
-}
+};
 
 export default Header;

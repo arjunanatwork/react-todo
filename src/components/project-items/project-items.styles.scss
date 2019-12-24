@@ -1,3 +1,10 @@
+.prj-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .prj-icon-delete,
 .prj-icon-edit {
   float:right;

@@ -26,7 +26,7 @@ const Home = ({currentUser, editProjectModal:{ editProjectModalHidden }, tasks})
     return (
         <Fragment>
             <Header/>
-            <div className="section">
+            <section className="section">
                 <div className="container">
                         <div className="sidebar is-hidden-touch">
                             <SideBar/>
@@ -43,7 +43,7 @@ const Home = ({currentUser, editProjectModal:{ editProjectModalHidden }, tasks})
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             <AddProjectModal/>
             { editProjectModalHidden ? null : (<EditProjectModal/>)}
         </Fragment>

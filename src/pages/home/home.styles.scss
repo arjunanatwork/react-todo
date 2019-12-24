@@ -30,10 +30,15 @@
 
 @media screen and (max-width: 768px) {
   .section {
-    padding: 0;
+    height: 100%;
+    padding: 3.25rem 0 0;
   }
 
   .button {
     min-width: 130px;
+  }
+
+  .modal-card {
+    width:85%;
   }
 }

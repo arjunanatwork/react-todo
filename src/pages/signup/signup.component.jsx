@@ -23,7 +23,7 @@ const SignUp = () => {
             <div className="login column is-4 ">
                 <section className="section">
                     <div className="has-text-centered">
-                        <img className="login-logo" src={appLogo}/>
+                        <img className="login-logo" src={appLogo} alt="login-logo"/>
                     </div>
                     <div className="field">
                         <label className="label">Display Name</label>

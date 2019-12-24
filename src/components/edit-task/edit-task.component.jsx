@@ -57,7 +57,7 @@ const EditTask = ({task}) => {
                               <i className="fas fa-list fa-lg"></i>
                             </span>
                         </div>
-                        <SwitchProjectDropdown task={task} projects={projects.filter(project => project.id != task.projectId)}/>
+                        <SwitchProjectDropdown task={task} projects={projects.filter(project => project.id !== task.projectId)}/>
                     </div>
                 </div>
             </div>

@@ -35,7 +35,7 @@ const TaskItem = ({task, index}) => {
 
     return (
         <Fragment>
-            <div className="task-item-details" style={{ display : (toggleEditTaskSelector.index == index && !toggleEditTaskSelector.hidden) ? 'none': 'flex'}}>
+            <div className="task-item-details" style={{ display : (toggleEditTaskSelector.index === index && !toggleEditTaskSelector.hidden) ? 'none': 'flex'}}>
                 <div className="field is-marginless">
                     <input className="is-checkradio is-primary" id={`taskDetail_${task.id}`} type="checkbox"
                            name={`taskDetail_${task.id}`} checked={!!task.isCompleted} onChange={handleTaskCheckboxChange}/>
@@ -54,7 +54,7 @@ const TaskItem = ({task, index}) => {
                     </span>
                 </div>
             </div>
-            { (toggleEditTaskSelector.index == index && !toggleEditTaskSelector.hidden) ? <EditTask task={task}/> : null }
+            { (toggleEditTaskSelector.index === index && !toggleEditTaskSelector.hidden) ? <EditTask task={task}/> : null }
         </Fragment>
     )
 };

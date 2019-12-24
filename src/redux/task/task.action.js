@@ -88,7 +88,7 @@ export const fetchTasksForDefaultProject = (userId) => {
                     tasks.push({...doc.data(), id: doc.id});
                 });
                 tasks.sort((a, b) => {
-                    if(a.isCompleted == 0 && b.isCompleted == 0)
+                    if(a.isCompleted === 0 && b.isCompleted === 0)
                         return b.createdAt.toDate() - a.createdAt.toDate();
                 });
                 dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
@@ -113,7 +113,7 @@ export const fetchTasksForToday = (userId) => {
                     tasks.push({...doc.data(), id: doc.id});
                 });
                 tasks.sort((a, b) => {
-                    if(a.isCompleted == 0 && b.isCompleted == 0)
+                    if(a.isCompleted === 0 && b.isCompleted === 0)
                         return b.createdAt.toDate() - a.createdAt.toDate();
                 });
                 dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
@@ -138,7 +138,7 @@ export const fetchTasksForAWeek = (userId) => {
                     tasks.push({...doc.data(), id: doc.id});
                 });
                 tasks.sort((a, b) => {
-                    if(a.isCompleted == 0 && b.isCompleted == 0)
+                    if(a.isCompleted === 0 && b.isCompleted === 0)
                         return b.createdAt.toDate() - a.createdAt.toDate();
                 });
                 dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })
@@ -160,7 +160,7 @@ export const fetchTasksByProject = (project) => {
                 tasks.push({...doc.data(), id: doc.id});
             });
             tasks.sort((a, b) => {
-                if(a.isCompleted == 0 && b.isCompleted == 0)
+                if(a.isCompleted === 0 && b.isCompleted === 0)
                     return b.createdAt.toDate() - a.createdAt.toDate();
             })
             dispatch({type: TaskActionTypes.FETCH_TASKS_SUCCESS, payload: { project, tasks} })

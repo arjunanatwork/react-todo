@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import {selectEditProjectModal} from "../../redux/project/project.selector";
-import {updateProjectStartAsync, editProjectModal } from "../../redux/project/project.action";
-import {selectCurrentUser} from "../../redux/user/user.selector";
+import {editProjectModal, updateProjectStartAsync} from "../../redux/project/project.action";
 import {fetchTasksByProject} from "../../redux/task/task.action";
 
 const EditProjectModal = ({ editProjectModal:{ editProjectModalHidden, project }, dispatch }) => {

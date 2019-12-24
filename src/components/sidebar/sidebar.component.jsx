@@ -1,15 +1,14 @@
-import React , { useEffect } from 'react';
-import {connect} from "react-redux";
+import React, {useEffect} from 'react';
+import {connect, useDispatch} from "react-redux";
 import './sidebar.styles.scss';
-import { useDispatch } from "react-redux";
-import { fetchProjectsStartAsync } from "../../redux/project/project.action";
+import {fetchProjectsStartAsync} from "../../redux/project/project.action";
 import AddProjectSidebar from "../add-project-sidebar/add-project-sidebar.component";
 import {createStructuredSelector} from "reselect";
 import {selectGetProjects} from "../../redux/project/project.selector";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import ProjectItem from "../project-items/project-items.component";
 import Loader from 'react-loader-spinner';
-import {fetchTasksForAWeek, fetchTasksForDefaultProject, fetchTasksForToday} from "../../redux/task/task.action";
+import DefaultMenuItems from "../default-menu-items/default-menu-items.components";
 
 const SideBar = ({projects, currentUser}) => {
 
@@ -20,31 +19,9 @@ const SideBar = ({projects, currentUser}) => {
             dispatch(fetchProjectsStartAsync(currentUser))
     }, [currentUser]);
 
-    const fetchDefaultTasks = () => {
-        dispatch(fetchTasksForDefaultProject(currentUser.id));
-    };
-
-    const fetchTodayTasks = () => {
-        dispatch(fetchTasksForToday(currentUser.id));
-    };
-
-    const fetchWeekTasks = () => {
-      dispatch(fetchTasksForAWeek(currentUser.id));
-    };
-
     return (
             <aside className="menu">
-                <ul className="menu-list">
-                    <li onClick={fetchDefaultTasks}>
-                        <a><span className="icon has-margin-right-5" style={{color:'#246fe0'}}><i className="fa fa-inbox"></i></span>Inbox</a>
-                    </li>
-                    <li onClick={fetchTodayTasks}>
-                        <a><span className="icon has-margin-right-5" style={{color: '#058527'}}><i className="fa fa-calendar-check"></i></span>Today</a>
-                    </li>
-                    <li onClick={fetchWeekTasks}>
-                        <a><span className="icon has-margin-right-5" style={{color: '#692fc2'}}><i className="fa fa-calendar-alt"></i></span>Next 7 days</a>
-                    </li>
-                </ul>
+                <DefaultMenuItems />
                 <p className="menu-label">
                     Projects
                 </p>
