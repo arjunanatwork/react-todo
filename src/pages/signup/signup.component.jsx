@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 
 const SignUp = () => {
 
-    const [displayName, setDisplayName] = useState('')
+    const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
         try {
-            const {user} = await auth.createUserWithEmailAndPassword(email, password)
+            const {user} = await auth.createUserWithEmailAndPassword(email, password);
             await createUserProfileDocument(user, {displayName});
         } catch (e) {
             console.error(e)
         }
-    }
+    };
 
     return (
         <div className="columns is-vcentered">
@@ -64,6 +64,6 @@ const SignUp = () => {
             </div>
         </div>
     )
-}
+};
 
 export default SignUp;

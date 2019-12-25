@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
-import './task-items.styles.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {deleteTaskStartAsync, toggleAddTask, toggleEditTask, updateTaskStartAsync} from "../../redux/task/task.action";
+
 import EditTask from "../edit-task/edit-task.component";
+import {deleteTaskStartAsync, toggleAddTask, toggleEditTask, updateTaskStartAsync} from "../../redux/task/task.action";
 import {selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
+
+import './task-items.styles.scss'
 
 const TaskItem = ({task, index}) => {
 

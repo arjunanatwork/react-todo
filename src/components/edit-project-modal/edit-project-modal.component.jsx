@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
-import {createStructuredSelector} from "reselect";
-import {selectEditProjectModal} from "../../redux/project/project.selector";
+import {createStructuredSelector} from "reselect"
+
 import {editProjectModal, updateProjectStartAsync} from "../../redux/project/project.action";
 import {fetchTasksByProject} from "../../redux/task/task.action";
+import {selectEditProjectModal} from "../../redux/project/project.selector";
 
 const EditProjectModal = ({ editProjectModal:{ editProjectModalHidden, project }, dispatch }) => {
     const [projectName, setProjectName] = useState('');
@@ -13,7 +14,7 @@ const EditProjectModal = ({ editProjectModal:{ editProjectModalHidden, project }
         setProjectName('');
         dispatch(editProjectModal(null));
         dispatch(fetchTasksByProject({...project, name:projectName}))
-    }
+    };
 
     return (
         <div className={`${!editProjectModalHidden ? 'is-active':''} modal`}>

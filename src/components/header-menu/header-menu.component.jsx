@@ -1,13 +1,14 @@
 import React from 'react';
-import {createStructuredSelector} from "reselect";
-import {selectGetProjects} from "../../redux/project/project.selector";
-import {selectCurrentUser} from "../../redux/user/user.selector";
 import {connect} from "react-redux";
-import ProjectItem from "../project-items/project-items.component";
+import {createStructuredSelector} from "reselect";
 import Loader from "react-loader-spinner";
 
-import './header-menu-styles.scss';
+import {selectGetProjects} from "../../redux/project/project.selector";
+import {selectCurrentUser} from "../../redux/user/user.selector";
+import ProjectItem from "../project-items/project-items.component";
 import DefaultMenuItems from "../default-menu-items/default-menu-items.components";
+
+import './header-menu-styles.scss';
 
 const HeaderMenu = ({projects, toggleBurgerMenu}) => {
 

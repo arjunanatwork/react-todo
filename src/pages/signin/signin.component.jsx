@@ -9,7 +9,7 @@ import './signin.styles.scss';
 const SignIn = () => {
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
         try {
@@ -17,7 +17,7 @@ const SignIn = () => {
         } catch (e) {
             console.error("Error while signing user")
         }
-    }
+    };
 
     return (
         <div className="columns is-vcentered">
@@ -56,7 +56,7 @@ const SignIn = () => {
                 </div>
         </div>
     )
-}
+};
 
 
 export default SignIn;

@@ -2,14 +2,17 @@ import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 import { connect } from "react-redux";
-import './App.scss';
-import 'bulma-helpers/css/bulma-helpers.min.css'
+import {createStructuredSelector} from "reselect";
+
+import { selectCurrentUser } from "./redux/user/user.selector";
+
 import SignIn from "./pages/signin/signin.component";
 import SignUp from "./pages/signup/signup.component";
 import {setCurrentUser} from "./redux/user/user.action";
-import { selectCurrentUser } from "./redux/user/user.selector";
 import Home from "./pages/home/home.component";
-import {createStructuredSelector} from "reselect";
+
+import './App.scss';
+import 'bulma-helpers/css/bulma-helpers.min.css'
 
 class App extends React.Component {
 

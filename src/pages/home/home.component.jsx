@@ -1,18 +1,20 @@
 import React, { useEffect, Fragment} from 'react';
 import {connect, useDispatch} from "react-redux";
 import {createStructuredSelector} from "reselect";
-import {selectEditProjectModal} from "../../redux/project/project.selector";
-import Header from "../../components/header/header.component";
-import SideBar from "../../components/sidebar/sidebar.component";
+import Loader from "react-loader-spinner";
 
-import './home.styles.scss';
+import {selectEditProjectModal} from "../../redux/project/project.selector";
+import {selectGetTasks} from "../../redux/task/task.selector";
+import {selectCurrentUser} from "../../redux/user/user.selector";
+
+import Header from "../../components/header/header.component";
+import TaskContainer from "../../components/task-container/task-container.component";
+import SideBar from "../../components/sidebar/sidebar.component";
 import AddProjectModal from "../../components/add-project-modal/add-project-modal.component";
 import EditProjectModal from "../../components/edit-project-modal/edit-project-modal.component";
-import TaskContainer from "../../components/task-container/task-container.component";
-import {selectGetTasks} from "../../redux/task/task.selector";
-import Loader from "react-loader-spinner";
-import {selectCurrentUser} from "../../redux/user/user.selector";
 import {fetchTasksForDefaultProject} from "../../redux/task/task.action";
+
+import './home.styles.scss';
 
 const Home = ({currentUser, editProjectModal:{ editProjectModalHidden }, tasks}) => {
 
@@ -32,7 +34,7 @@ const Home = ({currentUser, editProjectModal:{ editProjectModalHidden }, tasks})
                             <SideBar/>
                         </div>
                         <div className="main is-full-width-mobile">
-                            <div className="columns">
+                            <div className="columns is-marginless">
                                 <div className="column is-full">
                                     { tasks.project ?
                                         <TaskContainer project={tasks.project} tasks={tasks.tasks}/>

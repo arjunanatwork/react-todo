@@ -1,11 +1,12 @@
 import React from 'react';
-import './project-items.styles.scss';
-
 import {useDispatch, useSelector} from "react-redux";
+
 import {deleteProjectStartAsync, editProjectModal, toggleBurgerMenuAction} from "../../redux/project/project.action";
 import {fetchTasksByProject, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
 import {selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
 import {selectToggleBurgerMenu} from "../../redux/project/project.selector";
+
+import './project-items.styles.scss';
 
 const ProjectItem = ({project}) => {
 

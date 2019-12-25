@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {toggleEditTask, updateTaskStartAsync} from "../../redux/task/task.action";
+import {isMobile} from "react-device-detect";
 import DatePicker from "react-datepicker";
+
+import {toggleEditTask, updateTaskStartAsync} from "../../redux/task/task.action";
+import {toggleSwitchProjectDropdownHidden} from "../../redux/project/project.action";
+import {selectGetProjects, selectSwitchProjectDropdownHidden} from "../../redux/project/project.selector";
+import SwitchProjectDropdown from "../switch-project-dropdown/switch-project-dropdown.component";
+
 import "react-datepicker/dist/react-datepicker.css";
 import './edit-task.component.scss';
-import SwitchProjectDropdown from "../switch-project-dropdown/switch-project-dropdown.component";
-import {selectGetProjects, selectSwitchProjectDropdownHidden} from "../../redux/project/project.selector";
-import {toggleSwitchProjectDropdownHidden} from "../../redux/project/project.action";
-import {isMobile} from "react-device-detect";
 
 const EditTask = ({task}) => {
 

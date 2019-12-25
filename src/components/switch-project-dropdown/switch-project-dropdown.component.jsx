@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SwitchProjectDropdownItem from "../switch-project-dropdown-items/switch-project-dropdown-items.component";
+import {changeProjectAsync, toggleEditTask} from "../../redux/task/task.action";
 
 import './switch-project-dropdown.scss';
-import {changeProjectAsync, toggleEditTask} from "../../redux/task/task.action";
 
 const SwitchProjectDropdown = ({task, projects, changeProjectAsync, toggleEditTask}) => {
 

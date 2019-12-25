@@ -1,11 +1,11 @@
 import React, {Fragment, useState} from 'react';
 import {connect, useSelector} from "react-redux";
+import {createStructuredSelector} from "reselect";
 import {isMobile} from 'react-device-detect';
 
-import {selectCurrentUser} from "../../redux/user/user.selector";
 import {addTaskStartAsync, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
+import {selectCurrentUser} from "../../redux/user/user.selector";
 import {selectGetTasks, selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
-import {createStructuredSelector} from "reselect";
 
 const AddTask = ({ currentUser, projectDetails : { project }, dispatch}) => {
 

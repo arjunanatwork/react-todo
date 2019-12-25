@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
+
 import {toggleAddProjectModalHidden} from "../../redux/project/project.action";
 
 const AddProjectSidebar = ({toggleAddProjectModalHidden}) => (

@@ -1,7 +1,9 @@
 import React from 'react';
-import './task-container.styles.scss';
-import AddTask from "../add-task/add-task.component";
+
 import TaskItem from "../task-items/task-items.component";
+import AddTask from "../add-task/add-task.component";
+
+import './task-container.styles.scss';
 
 const TaskContainer = ({project, tasks}) => {
 

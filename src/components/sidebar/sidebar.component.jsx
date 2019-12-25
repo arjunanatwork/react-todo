@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
 import {connect, useDispatch} from "react-redux";
-import './sidebar.styles.scss';
-import {fetchProjectsStartAsync} from "../../redux/project/project.action";
-import AddProjectSidebar from "../add-project-sidebar/add-project-sidebar.component";
+import Loader from 'react-loader-spinner';
 import {createStructuredSelector} from "reselect";
+
 import {selectGetProjects} from "../../redux/project/project.selector";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import ProjectItem from "../project-items/project-items.component";
-import Loader from 'react-loader-spinner';
+import {fetchProjectsStartAsync} from "../../redux/project/project.action";
 import DefaultMenuItems from "../default-menu-items/default-menu-items.components";
+import AddProjectSidebar from "../add-project-sidebar/add-project-sidebar.component";
+
+import './sidebar.styles.scss';
 
 const SideBar = ({projects, currentUser}) => {
 

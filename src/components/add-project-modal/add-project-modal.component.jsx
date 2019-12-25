@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {connect} from "react-redux";
-import {selectAddProjectModalHidden} from "../../redux/project/project.selector";
 import {createStructuredSelector} from "reselect";
+
 import {addProjectStartAsync, toggleAddProjectModalHidden} from "../../redux/project/project.action";
+import {selectAddProjectModalHidden} from "../../redux/project/project.selector";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 
 const AddProjectModal = ({isActive, currentUser, dispatch}) => {
@@ -10,10 +11,10 @@ const AddProjectModal = ({isActive, currentUser, dispatch}) => {
     const [projectName, setProjectName] = useState('');
 
     const addProject = async (projectName) => {
-        await dispatch(addProjectStartAsync(currentUser.id , projectName))
-        setProjectName('')
+        await dispatch(addProjectStartAsync(currentUser.id , projectName));
+        setProjectName('');
         dispatch(toggleAddProjectModalHidden())
-    }
+    };
 
     return (
         <div className={`${!isActive ? 'is-active':''} modal`}>
