@@ -29,6 +29,13 @@
 
 
 @media screen and (max-width: 768px) {
+  .login {
+    .section {
+      height: 100%;
+      padding: 3rem 1.5rem !important;
+    }
+  }
+
   .section {
     height: 100%;
     padding: 3.25rem 0 0 !important;
