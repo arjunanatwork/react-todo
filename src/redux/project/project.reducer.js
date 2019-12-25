@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     projects: null,
     addProjectModalHidden: true,
     switchProjectDropdownHidden: true,
+    toggleBurgerMenu: false,
     editProjectModal: { editProjectModalHidden: true, project: null},
     isLoading: false,
     errorMessage: undefined
@@ -12,6 +13,11 @@ const INITIAL_STATE = {
 const ProjectReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+        case ProjectActionTypes.TOGGLE_BURGER_MENU:
+            return {
+                ...state,
+                toggleBurgerMenu: !state.toggleBurgerMenu
+            };
         case ProjectActionTypes.ADD_PROJECT_MODAL_HIDDEN:
             return {
                 ...state,

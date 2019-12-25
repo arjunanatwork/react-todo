@@ -23,6 +23,9 @@ export const toggleSwitchProjectDropdownHidden = () => ({
     type: ProjectActionTypes.SWITCH_PROJECT_DROPDOWN_HIDDEN
 });
 
+export const toggleBurgerMenuAction = () => ({
+   type: ProjectActionTypes.TOGGLE_BURGER_MENU
+});
 
 export const addProjectStartAsync = (userId, projectName) => {
     return async (dispatch) => {

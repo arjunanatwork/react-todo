@@ -9,10 +9,10 @@ import Loader from "react-loader-spinner";
 import './header-menu-styles.scss';
 import DefaultMenuItems from "../default-menu-items/default-menu-items.components";
 
-const HeaderMenu = ({projects, burgerToggle}) => {
+const HeaderMenu = ({projects, toggleBurgerMenu}) => {
 
     return (
-        <div id="navbarMenu" className={`navbar-menu is-hidden-desktop ${burgerToggle ? 'is-active':''}`}>
+        <div id="navbarMenu" className={`navbar-menu is-hidden-desktop ${toggleBurgerMenu ? 'is-active':''}`}>
             <div className="navbar-start">
                 <DefaultMenuItems />
                 <div className="navbar-item has-dropdown">

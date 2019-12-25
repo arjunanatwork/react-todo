@@ -1,22 +1,31 @@
 import React from 'react';
 import {fetchTasksForAWeek, fetchTasksForDefaultProject, fetchTasksForToday} from "../../redux/task/task.action";
-import {connect, useDispatch} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import {selectCurrentUser} from "../../redux/user/user.selector";
+import {selectToggleBurgerMenu} from "../../redux/project/project.selector";
+import {toggleBurgerMenuAction} from "../../redux/project/project.action";
 
 const DefaultMenuItems = ({currentUser}) => {
     const dispatch = useDispatch();
+    const toggleBurgerMenu = useSelector(selectToggleBurgerMenu);
 
     const fetchDefaultTasks = () => {
         dispatch(fetchTasksForDefaultProject(currentUser.id));
+        if(toggleBurgerMenu)
+            dispatch(toggleBurgerMenuAction());
     };
 
     const fetchTodayTasks = () => {
         dispatch(fetchTasksForToday(currentUser.id));
+        if(toggleBurgerMenu)
+            dispatch(toggleBurgerMenuAction());
     };
 
     const fetchWeekTasks = () => {
         dispatch(fetchTasksForAWeek(currentUser.id));
+        if(toggleBurgerMenu)
+            dispatch(toggleBurgerMenuAction());
     };
 
     return (

@@ -2,15 +2,17 @@ import React from 'react';
 import './project-items.styles.scss';
 
 import {useDispatch, useSelector} from "react-redux";
-import {deleteProjectStartAsync, editProjectModal} from "../../redux/project/project.action";
+import {deleteProjectStartAsync, editProjectModal, toggleBurgerMenuAction} from "../../redux/project/project.action";
 import {fetchTasksByProject, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
 import {selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
+import {selectToggleBurgerMenu} from "../../redux/project/project.selector";
 
 const ProjectItem = ({project}) => {
 
     const dispatch = useDispatch();
     const {hidden: isEditTaskHidden, index} = useSelector(selectToggleEditTask);
     const toggleAddTaskSelector = useSelector(selectToggleAddTask);
+    const toggleBurgerMenu = useSelector(selectToggleBurgerMenu);
 
     const deleteProject = (e) => {
         e.stopPropagation();
@@ -23,13 +25,15 @@ const ProjectItem = ({project}) => {
     };
 
     const fetchTasks = () => {
-        if(toggleAddTaskSelector) {
-            dispatch(toggleAddTask())
-        }
+        if(toggleBurgerMenu)
+            dispatch(toggleBurgerMenuAction());
 
-        if(!isEditTaskHidden) {
-            dispatch(toggleEditTask(index))
-        }
+        if(toggleAddTaskSelector)
+            dispatch(toggleAddTask());
+
+        if(!isEditTaskHidden)
+            dispatch(toggleEditTask(index));
+
 
         dispatch(fetchTasksByProject(project))
     };

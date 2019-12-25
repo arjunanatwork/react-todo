@@ -7,6 +7,11 @@ export const selectAddProjectModalHidden = createSelector(
     (project) => project.addProjectModalHidden
 );
 
+export const selectToggleBurgerMenu = createSelector(
+    [selectProject],
+    (project) => project.toggleBurgerMenu
+);
+
 export const selectSwitchProjectDropdownHidden = createSelector(
     [selectProject],
     (project) => project.switchProjectDropdownHidden
