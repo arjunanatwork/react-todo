@@ -9,6 +9,8 @@ import ProjectItem from "../project-items/project-items.component";
 import DefaultMenuItems from "../default-menu-items/default-menu-items.components";
 
 import './header-menu-styles.scss';
+import AddProjectSidebar from "../add-project-sidebar/add-project-sidebar.component";
+import Settings from "../settings/settings.component";
 
 const HeaderMenu = ({projects, toggleBurgerMenu}) => {
 
@@ -29,6 +31,17 @@ const HeaderMenu = ({projects, toggleBurgerMenu}) => {
                                 (<div style={{textAlign:'center'}}><Loader type="Puff" color="#e44232"  height={20} width={20}/></div>)
                         }
                         </ul>
+                        <div className="content add-project-blk">
+                            <AddProjectSidebar/>
+                        </div>
+                    </div>
+                </div>
+                <div className="navbar-item has-dropdown">
+                    <div className="navbar-link">
+                        <strong>Settings</strong>
+                    </div>
+                    <div className="navbar-dropdown is-paddingless">
+                        <Settings/>
                     </div>
                 </div>
             </div>

@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from "react-redux";
 
 import {toggleAddProjectModalHidden} from "../../redux/project/project.action";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const AddProjectSidebar = ({toggleAddProjectModalHidden}) => (
     <p onClick={toggleAddProjectModalHidden}>
         <span className="icon has-margin-right-5">
-        <i className="fa fa-plus"></i></span>Add Project
+        <FontAwesomeIcon icon="plus"/></span>Add Project
     </p>
 );
 

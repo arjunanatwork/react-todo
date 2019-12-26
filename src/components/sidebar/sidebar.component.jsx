@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {connect, useDispatch} from "react-redux";
 import Loader from 'react-loader-spinner';
 import {createStructuredSelector} from "reselect";
@@ -11,6 +11,7 @@ import DefaultMenuItems from "../default-menu-items/default-menu-items.component
 import AddProjectSidebar from "../add-project-sidebar/add-project-sidebar.component";
 
 import './sidebar.styles.scss';
+import Settings from "../settings/settings.component";
 
 const SideBar = ({projects, currentUser}) => {
 
@@ -39,6 +40,10 @@ const SideBar = ({projects, currentUser}) => {
                 <div className="content add-project-blk">
                     <AddProjectSidebar/>
                 </div>
+                <p className="menu-label">
+                    Settings
+                </p>
+                <Settings/>
             </aside>
     )
 };

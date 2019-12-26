@@ -18,7 +18,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-    console.log(additionalData)
+    console.log(additionalData);
 
     if(!userAuth) return;
 
