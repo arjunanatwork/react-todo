@@ -1,23 +1,24 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 
 import {deleteProjectStartAsync, editProjectModal, toggleBurgerMenuAction} from "../../redux/project/project.action";
 import {fetchTasksByProject, toggleAddTask, toggleEditTask} from "../../redux/task/task.action";
-import {selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
+import {selectGetTasks, selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
 import {selectToggleBurgerMenu} from "../../redux/project/project.selector";
+import {selectCurrentUser} from "../../redux/user/user.selector";
 
 import './project-items.styles.scss';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {createStructuredSelector} from "reselect";
 
-const ProjectItem = ({project}) => {
+const ProjectItem = ({project, currentUser, toggleAddTaskSelector, toggleBurgerMenu}) => {
 
     const dispatch = useDispatch();
     const {hidden: isEditTaskHidden, index} = useSelector(selectToggleEditTask);
-    const toggleAddTaskSelector = useSelector(selectToggleAddTask);
-    const toggleBurgerMenu = useSelector(selectToggleBurgerMenu);
 
     const deleteProject = (e) => {
         e.stopPropagation();
-        dispatch(deleteProjectStartAsync(project.id))
+        dispatch(deleteProjectStartAsync(project.id, currentUser.id))
     };
 
     const editProject = (e) => {
@@ -26,13 +27,13 @@ const ProjectItem = ({project}) => {
     };
 
     const fetchTasks = () => {
-        if(toggleBurgerMenu)
+        if(toggleBurgerMenu) // Hide Burger Menu if Enabled
             dispatch(toggleBurgerMenuAction());
 
-        if(toggleAddTaskSelector)
+        if(toggleAddTaskSelector) // Hide Add Task if Enabled
             dispatch(toggleAddTask());
 
-        if(!isEditTaskHidden)
+        if(!isEditTaskHidden) // Hide Edit Task if Enabled
             dispatch(toggleEditTask(index));
 
 
@@ -48,10 +49,10 @@ const ProjectItem = ({project}) => {
                     </div>
                     <div className="prj-actions">
                         <span className="icon prj-icon-delete has-text-grey" onClick={deleteProject}>
-                        <i className="fas fa-trash"></i>
+                         <FontAwesomeIcon icon="trash"/>
                     </span>
                         <span className="icon prj-icon-edit has-text-grey" onClick={editProject}>
-                        <i className="fas fa-edit"></i>
+                         <FontAwesomeIcon icon="edit"/>
                     </span>
                     </div>
                 </div>
@@ -60,4 +61,9 @@ const ProjectItem = ({project}) => {
     )
 };
 
-export default ProjectItem
+const mapStateToProps = createStructuredSelector({
+    currentUser : selectCurrentUser,
+    toggleAddTaskSelector: selectToggleAddTask,
+    toggleBurgerMenu: selectToggleBurgerMenu
+});
+export default connect(mapStateToProps)(ProjectItem)

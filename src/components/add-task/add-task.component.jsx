@@ -31,7 +31,7 @@ const AddTask = ({ currentUser, projectDetails : { project }, dispatch}) => {
     return (
         <Fragment>
             <div className="content add-task" style={{'display': !toggleAddTaskSelector ? 'block':'none'}}>
-                <a href="#" onClick={toggleAddDetailBtn}><span className='icon add-task-icon'><FontAwesomeIcon icon="plus"/></span> Add Task</a>
+                <a onClick={toggleAddDetailBtn}><span className='icon add-task-icon'><FontAwesomeIcon icon="plus"/></span> Add Task</a>
             </div>
             <div className="content add-task-detail" style={{'display': toggleAddTaskSelector ? 'block':'none'}}>
                 <input className="input" type="text" placeholder="Task Detail" value={taskDetail} onChange={(e) => setTaskDetail(e.target.value)}/>

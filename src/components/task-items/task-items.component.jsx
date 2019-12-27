@@ -6,6 +6,7 @@ import {deleteTaskStartAsync, toggleAddTask, toggleEditTask, updateTaskStartAsyn
 import {selectToggleAddTask, selectToggleEditTask} from "../../redux/task/task.selector";
 
 import './task-items.styles.scss'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const TaskItem = ({task, index}) => {
 
@@ -49,10 +50,10 @@ const TaskItem = ({task, index}) => {
                 </div>
                 <div className="task-item-action">
                     <span className="icon has-text-grey task-icon-edit" onClick={toggleEditTaskAction}>
-                            <i className="fas fa-edit"></i>
+                            <FontAwesomeIcon icon="edit"/>
                     </span>
                     <span className="icon has-text-grey task-icon-delete" onClick={deleteTaskAction}>
-                            <i className="fas fa-trash"></i>
+                             <FontAwesomeIcon icon="trash"/>
                     </span>
                 </div>
             </div>

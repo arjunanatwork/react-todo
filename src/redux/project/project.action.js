@@ -1,5 +1,6 @@
 import { ProjectActionTypes } from "./project.types";
 import {firestore} from "../../firebase/firebase.util";
+import {fetchTasksForDefaultProject} from "../task/task.action";
 
 export const toggleAddProjectModalHidden = () => ({
     type: ProjectActionTypes.ADD_PROJECT_MODAL_HIDDEN
@@ -52,10 +53,22 @@ export const updateProjectStartAsync = (projectId, projectName) => {
     }
 };
 
-export const deleteProjectStartAsync = (id) => {
+export const deleteProjectStartAsync = (projectId, userId) => {
     return async (dispatch) => {
         try {
-            await firestore.collection('projects').doc(id).delete();
+            await firestore.collection('tasks')
+                .where("projectId", "==", projectId).get().then(
+                    (querySnapshot) => {
+                        if(!querySnapshot.empty) {
+                            var batch = firestore.batch();
+                            querySnapshot.forEach(function (doc) {
+                                batch.delete(doc.ref);
+                            });
+                            batch.commit();
+                        }
+                    });
+            await firestore.collection('projects').doc(projectId).delete();
+            dispatch(fetchTasksForDefaultProject(userId));
         } catch (e) {
             console.log("Error while deleting Project")
         }

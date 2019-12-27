@@ -27,6 +27,7 @@ this.addEventListener('fetch', event => {
                     }
                     return fetch(event.request);
                 }
+
             )
     );
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faInbox, faCalendarCheck, faCalendarAlt, faPlus, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {faInbox, faCalendarCheck, faCalendarAlt, faPlus, faSignOutAlt, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -21,7 +21,7 @@ WebFont.load({
     }
 });
 
-library.add(faInbox, faCalendarCheck, faCalendarAlt, faPlus, faSignOutAlt);
+library.add(faInbox, faCalendarCheck, faCalendarAlt, faPlus, faSignOutAlt, faEdit, faTrash);
 
 ReactDOM.render(
     <Provider store={store}>
