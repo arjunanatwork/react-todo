@@ -17,7 +17,7 @@ import './index.css';
 
 WebFont.load({
     google: {
-        families: ['IBM Plex Sans:400,500,700', 'sans-serif']
+        families: ['IBM Plex Sans:400,500,700&display=swap', 'sans-serif']
     }
 });
 
